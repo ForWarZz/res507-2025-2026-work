@@ -28,7 +28,7 @@ jobs:
 
     - name: Execute tests
       working-directory: labs/20-containerized-node-app/app
-      run: node test
+      run: npm run test
     
     - name: Build Docker image
       working-directory: labs/20-containerized-node-app
