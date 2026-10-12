@@ -16,6 +16,8 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
+        ports:
+        - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -30,7 +32,7 @@ jobs:
       env:
         PGPASSWORD: postgres
       run: |
-        psql -h postgres -U postgres -d postgres -p 5432 -f labs/20-containerized-node-app/db/init.sql
+        psql -h localhost -U postgres -d postgres -p 5432 -f labs/20-containerized-node-app/db/init.sql
 
     - name: Set up Node.js
       uses: actions/setup-node@v7
