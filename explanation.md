@@ -10,6 +10,7 @@
 - Ne fait aucun tests de performances
 - Ne fait aucun tests de sécurité
 - Ne garantit pas le fonctionnement en production (l'image Docker est construite.. mais la production peut avoir un environnement spéciale avec BDD etc)
+- Ne déploy pas en production, il ne fait que des tests de "fonctionnement"
 
 ## Diagnostique de FAIL CI
 
