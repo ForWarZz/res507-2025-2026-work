@@ -9,18 +9,13 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      # Label used to access the service container
       postgres:
         # Docker Hub image
         image: postgres
-        # Provide the password for postgres
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
-        volumes:
-          - labs/20-containerized-node-app/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
-        # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -30,6 +25,12 @@ jobs:
     steps:
     - name: Check out repository
       uses: actions/checkout@v7
+
+    - name: Initialize PostgreSQL database
+      env:
+        PGPASSWORD: postgres
+      run: |
+        psql -h localhost -U postgres -d postgres -f labs/20-containerized-node-app/db/init.sql
 
     - name: Set up Node.js
       uses: actions/setup-node@v7
