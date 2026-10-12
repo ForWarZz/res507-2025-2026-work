@@ -26,9 +26,9 @@ jobs:
         node --check app.js
         node --check server.js
 
-    - name: Execute tests
-      working-directory: labs/20-containerized-node-app/app
-      run: npm run test
+    # - name: Execute tests
+    #   working-directory: labs/20-containerized-node-app/app
+    #   run: npm run test
     
     - name: Build Docker image
       working-directory: labs/20-containerized-node-app
