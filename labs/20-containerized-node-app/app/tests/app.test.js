@@ -77,3 +77,14 @@ test("GET /quotes returns quotes from the database", async () => {
   assert.strictEqual(response.statusCode, 200);
   assert.match(response.body, /This is a test quote from the databasee./);
 });
+
+test("GET unknown route returns 404", async () => {
+  const app = await buildApp();
+
+  const response = await app.inject({
+    method: "GET",
+    url: "/unknown-route",
+  });
+
+  assert.strictEqual(response.statusCode, 404);
+});
