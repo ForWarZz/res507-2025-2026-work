@@ -19,7 +19,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
         volumes:
-          - ../db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+          - labs/20-containerized-node-app/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
