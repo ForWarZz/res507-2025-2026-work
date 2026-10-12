@@ -18,7 +18,7 @@ export async function buildApp() {
   await app.register(view, {
     engine: { handlebars: handlebars },
     root: new URL("./views/", import.meta.url).pathname,
-  });
+  
 
   await app.register(fastifyStatic, {
     root: new URL("./public/", import.meta.url).pathname,
