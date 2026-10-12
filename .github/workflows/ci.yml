@@ -37,7 +37,7 @@ jobs:
 
     - name: Run container smoke test
       run: |
-        docker run -d --name quote-app -p 3000:3000 quote-app
+        docker run -d --name quote-app -p 3001:3000 quote-app
         for attempt in $(seq 1 30); do
           if curl --fail --silent --show-error \
             --connect-timeout 1 --max-time 2 \
