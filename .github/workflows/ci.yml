@@ -7,6 +7,26 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        volumes:
+          - ../db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
     - name: Check out repository
       uses: actions/checkout@v7
@@ -26,13 +46,13 @@ jobs:
         node --check app.js
         node --check server.js
 
-    # - name: Execute tests
-    #   working-directory: labs/20-containerized-node-app/app
-    #   run: npm run test
+    - name: Execute tests
+      working-directory: labs/20-containerized-node-app/app
+      run: npm run test
     
     - name: Build Docker image
       working-directory: labs/20-containerized-node-app
-      run: docker build -t quote-app -f docker/Dockerfile .
+      run: docker build -t quote-app -f docker/Dockerfile DATABASE_URL=postgresql://postgres:postgres@postgres:5432/postgres .
     
 
     - name: Run container smoke test
