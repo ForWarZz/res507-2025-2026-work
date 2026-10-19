@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: quote-config
 data:
-  PORT: "3001"
+  PORT: '3001'
